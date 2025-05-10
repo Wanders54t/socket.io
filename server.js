@@ -6,8 +6,10 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Middleware para habilitar CORS
-app.use(cors());
+// Middleware para habilitar CORS apenas para cinefly.wuaze.com
+app.use(cors({
+  origin: 'https://cinefly.wuaze.com'
+}));
 
 // Endpoint para fornecer o token de forma segura
 app.get('/api/token', (req, res) => {
