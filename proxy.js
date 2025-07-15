@@ -7,12 +7,14 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/proxy', async (req, res) => {
+  // Recebe os parâmetros do frontend
   const { url, token, userAgent } = req.body;
   if (!url || !token) {
     return res.status(400).json({ error: 'URL e Token obrigatórios.' });
   }
 
   try {
+    // Faz a requisição HTTP para a API
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -24,6 +26,7 @@ app.post('/proxy', async (req, res) => {
       }
     });
 
+    // Retorna o resultado para o frontend
     const data = await response.json();
     res.json(data);
   } catch (err) {
